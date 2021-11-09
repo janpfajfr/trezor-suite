@@ -6,7 +6,7 @@ import TrezorConnect, {
 } from 'trezor-connect';
 import { SUITE } from '@suite-actions/constants';
 import { lockDevice } from '@suite-actions/suiteActions';
-import { resolveStaticPath } from '@suite-utils/build';
+// import { resolveStaticPath } from '@suite-utils/build';
 import { Dispatch, GetState } from '@suite-types';
 import { isWeb } from '@suite-utils/env';
 
@@ -60,12 +60,12 @@ export const init = () => async (dispatch: Dispatch, getState: GetState) => {
     });
 
     try {
-        const connectSrc = resolveStaticPath('connect/');
+        // const connectSrc = resolveStaticPath('connect/');
         // 'https://localhost:8088/';
         // 'https://connect.corp.sldev.cz/develop/';
 
         await TrezorConnect.init({
-            connectSrc,
+            connectSrc: 'https://connect.corp.sldev.cz/single-messages/',
             transportReconnect: true,
             debug: false,
             popup: false,
