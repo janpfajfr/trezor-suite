@@ -1,10 +1,12 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import protocolReducer, { State as ProtocolState } from '@suite-reducers/protocolReducer';
+import protocolReducer, {
+    State as ProtocolState,
+    PROTOCOL_SCHEME,
+} from '@suite-reducers/protocolReducer';
 import * as protocolActions from '../protocolActions';
 import * as protocolConstants from '../constants/protocolConstants';
-import { PROTOCOL_SCHEME } from '@suite/support/suite/Protocol';
 
 export const getInitialState = (state?: ProtocolState) => ({
     protocol: {

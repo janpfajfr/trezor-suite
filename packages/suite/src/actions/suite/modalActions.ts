@@ -7,7 +7,8 @@ import { createDeferred, Deferred, DeferredResponse } from '@suite-utils/deferre
 export type UserContextPayload =
     | {
           type: 'qr-reader';
-          decision: Deferred<{ address: string; amount?: string }>;
+          decision: Deferred<Record<string, string | undefined>>;
+          allowPaste?: boolean;
       }
     | {
           type: 'unverified-address';
@@ -108,6 +109,13 @@ export type UserContextPayload =
       }
     | {
           type: 'safety-checks';
+      }
+    | {
+          type: 'send-aopp-message';
+          address: string;
+          signature: string;
+          callback: string;
+          decision: Deferred<boolean>;
       };
 
 export type ModalAction =
@@ -193,7 +201,8 @@ type DeferredModals = Extract<
             | 'import-transaction'
             | 'coinmarket-buy-terms'
             | 'coinmarket-sell-terms'
-            | 'coinmarket-exchange-terms';
+            | 'coinmarket-exchange-terms'
+            | 'send-aopp-message';
     }
 >;
 // extract single modal by `type` util

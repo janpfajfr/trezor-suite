@@ -2635,6 +2635,10 @@ export default defineMessages({
         description: 'Title for the Scan QR modal dialog',
         id: 'TR_SCAN_QR_CODE',
     },
+    TR_PASTE_URI: {
+        defaultMessage: 'Paste URI',
+        id: 'TR_PASTE_URI',
+    },
     TR_SECURITY_HEADING: {
         defaultMessage: 'Your wallet is almost ready',
         description: 'Heading in security page',
@@ -6699,5 +6703,29 @@ export default defineMessages({
     TR_DO_YOU_REALLY_WANT_TO_SKIP: {
         id: 'TR_DO_YOU_REALLY_WANT_TO_SKIP',
         defaultMessage: 'Do you really want to skip this step?',
+    },
+    TR_AOPP_IMPORT: {
+        id: 'TR_AOPP_IMPORT',
+        defaultMessage: 'Import AOPP',
+    },
+    TR_AOPP_SEND: {
+        id: 'TR_AOPP_SEND',
+        defaultMessage: 'Send ownership proof',
+    },
+    TOAST_AOPP_FILL_HEADER: {
+        id: 'TOAST_AOPP_FILL_HEADER',
+        defaultMessage: 'Go to Sign & Verify form',
+    },
+    TOAST_AOPP_FILL_ACTION: {
+        id: 'TOAST_AOPP_FILL_ACTION',
+        defaultMessage: 'Fill form',
+    },
+    TOAST_AOPP_SUCCESS: {
+        id: 'TOAST_AOPP_SUCCESS',
+        defaultMessage: 'Address ownership proof sent',
+    },
+    TOAST_AOPP_ERROR: {
+        id: 'TOAST_AOPP_ERROR',
+        defaultMessage: 'Address ownership proof failed: {error}',
     },
 });

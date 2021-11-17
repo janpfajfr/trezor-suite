@@ -3,7 +3,7 @@ import { DEVICE } from 'trezor-connect';
 import { NOTIFICATION, SUITE } from '@suite-actions/constants';
 import { Action, TrezorDevice } from '@suite-types';
 import { Network } from '@wallet-types';
-import { PROTOCOL_SCHEME } from '@suite/support/suite/Protocol';
+import { PROTOCOL_SCHEME } from '@suite-reducers/protocolReducer';
 import { UpdateState } from '@suite-reducers/desktopUpdateReducer';
 
 interface Options {
@@ -30,7 +30,8 @@ export type ToastPayload = (
               | 'backup-success'
               | 'backup-failed'
               | 'sign-message-success'
-              | 'verify-message-success';
+              | 'verify-message-success'
+              | 'aopp-success';
       }
     | {
           type: 'tx-sent';
@@ -65,6 +66,7 @@ export type ToastPayload = (
               | 'verify-address-error'
               | 'sign-message-error'
               | 'verify-message-error'
+              | 'aopp-error'
               | 'sign-tx-error'
               | 'metadata-auth-error'
               | 'metadata-not-found-error'
@@ -90,6 +92,11 @@ export type ToastPayload = (
           scheme: PROTOCOL_SCHEME;
           address: string;
           amount?: number;
+      }
+    | {
+          type: 'aopp-protocol';
+          message: string;
+          asset: Network['symbol'];
       }
 ) &
     Options;

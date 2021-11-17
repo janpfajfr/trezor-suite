@@ -1,5 +1,5 @@
-import { PROTOCOL_SCHEME } from '@suite-support/Protocol';
 import { PROTOCOL } from './constants';
+import { AoppState, PROTOCOL_SCHEME } from '@suite-reducers/protocolReducer';
 
 export type ProtocolAction =
     | {
@@ -7,8 +7,16 @@ export type ProtocolAction =
           payload: boolean;
       }
     | {
+          type: typeof PROTOCOL.FILL_AOPP;
+          payload: boolean;
+      }
+    | {
           type: typeof PROTOCOL.SAVE_COIN_PROTOCOL;
           payload: { scheme: PROTOCOL_SCHEME; address: string; amount?: number };
+      }
+    | {
+          type: typeof PROTOCOL.SAVE_AOPP_PROTOCOL;
+          payload: AoppState;
       }
     | { type: typeof PROTOCOL.RESET };
 
@@ -24,6 +32,16 @@ export const saveCoinProtocol = (
 ): ProtocolAction => ({
     type: PROTOCOL.SAVE_COIN_PROTOCOL,
     payload: { scheme, address, amount },
+});
+
+export const fillAopp = (shouldFill: boolean): ProtocolAction => ({
+    type: PROTOCOL.FILL_AOPP,
+    payload: shouldFill,
+});
+
+export const saveAoppProtocol = (payload: AoppState): ProtocolAction => ({
+    type: PROTOCOL.SAVE_AOPP_PROTOCOL,
+    payload,
 });
 
 export const resetProtocol = (): ProtocolAction => ({

@@ -58,7 +58,8 @@
         "protocols": {
             "name": "Trezor Suite",
             "schemes": [
-                "bitcoin"
+                "bitcoin",
+                "aopp"
             ]
         },
         "publish": {

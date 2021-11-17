@@ -19,7 +19,7 @@ import { useSendFormFields } from './useSendFormFields';
 import { useSendFormCompose } from './useSendFormCompose';
 import { useSendFormImport } from './useSendFormImport';
 import { useFees } from './form/useFees';
-import { PROTOCOL_TO_SYMBOL } from '@suite/support/suite/Protocol';
+import { PROTOCOL_TO_SYMBOL } from '@suite-reducers/protocolReducer';
 
 export const SendContext = createContext<SendContextValues | null>(null);
 SendContext.displayName = 'SendContext';

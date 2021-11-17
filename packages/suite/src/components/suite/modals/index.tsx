@@ -41,6 +41,7 @@ import MetadataProvider from './metadata/MetadataProvider';
 import AdvancedCoinSettings from './AdvancedCoinSettings';
 import AddToken from './AddToken';
 import SafetyChecks from './SafetyChecks';
+import SendAoppMessage from './SendAoppMessage';
 
 const mapStateToProps = (state: AppState) => ({
     modal: state.modal,
@@ -172,7 +173,13 @@ const getUserContextModal = (props: Props) => {
         case 'wipe-device':
             return <WipeDevice onCancel={modalActions.onCancel} />;
         case 'qr-reader':
-            return <QrScanner decision={payload.decision} onCancel={modalActions.onCancel} />;
+            return (
+                <QrScanner
+                    decision={payload.decision}
+                    allowPaste={payload.allowPaste}
+                    onCancel={modalActions.onCancel}
+                />
+            );
         case 'transaction-detail':
             return <TransactionDetail {...payload} onCancel={modalActions.onCancel} />;
         case 'passphrase-duplicate':
@@ -223,6 +230,8 @@ const getUserContextModal = (props: Props) => {
             return <AddToken {...payload} onCancel={modalActions.onCancel} />;
         case 'safety-checks':
             return <SafetyChecks onCancel={modalActions.onCancel} />;
+        case 'send-aopp-message':
+            return <SendAoppMessage {...payload} onCancel={modalActions.onCancel} />;
         default:
             return null;
     }

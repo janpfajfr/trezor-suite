@@ -1,4 +1,6 @@
-import { PROTOCOL_SCHEME } from '@suite-support/Protocol';
+import { PROTOCOL_SCHEME } from '@suite-reducers/protocolReducer';
+import { isNetworkSymbol } from '@wallet-utils/accountUtils';
+import type { Network } from '@wallet-types';
 
 // Parse URL query string (like 'foo=bar&baz=1337) into an object
 export const parseQuery = (uri: string) => {
@@ -23,7 +25,22 @@ export const parseUri = (uri: string) => {
     }
 };
 
-export const getProtocolInfo = (uri: string) => {
+export type BitcoinProtocolInfo = {
+    scheme: PROTOCOL_SCHEME.BITCOIN;
+    address: string;
+    amount?: number;
+};
+
+export type AoppProtocolInfo = {
+    scheme: PROTOCOL_SCHEME.AOPP;
+    msg: string;
+    asset: Network['symbol'];
+    v?: string;
+    format?: string;
+    callback?: string;
+};
+
+export const getProtocolInfo = (uri: string): BitcoinProtocolInfo | AoppProtocolInfo | null => {
     const url = parseUri(uri);
     if (!url) return null;
 
@@ -40,10 +57,12 @@ export const getProtocolInfo = (uri: string) => {
             scheme,
             address: pathname || host,
             amount,
-        } as const;
+        };
     }
 
     if (scheme === PROTOCOL_SCHEME.AOPP) {
+        if (!params.msg) return null;
+        if (!params.asset || !isNetworkSymbol(params.asset)) return null;
         const validCallback = parseUri(params.callback ?? '');
         return {
             scheme,
@@ -52,7 +71,7 @@ export const getProtocolInfo = (uri: string) => {
             format: params.format,
             msg: params.msg,
             callback: validCallback ? params.callback : undefined,
-        } as const;
+        };
     }
 
     return null;

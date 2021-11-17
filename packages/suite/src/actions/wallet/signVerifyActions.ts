@@ -1,7 +1,9 @@
 import TrezorConnect, { ButtonRequestMessage, UI, Unsuccessful, Success } from 'trezor-connect';
 import { SIGN_VERIFY } from './constants';
 import { addToast } from '@suite-actions/notificationActions';
-import { openModal } from '@suite-actions/modalActions';
+import { PROTOCOL_SCHEME } from '@suite-reducers/protocolReducer';
+import { openModal, openDeferredModal } from '@suite-actions/modalActions';
+import { getProtocolInfo } from '@suite-utils/parseUri';
 import type { Dispatch, GetState, TrezorDevice } from '@suite-types';
 import type { Account } from '@wallet-types';
 
@@ -184,3 +186,27 @@ export const verify =
             .then(throwWhenFailed)
             .then(onVerifySuccess(dispatch))
             .catch(onError(dispatch, 'verify-message-error'));
+
+export const importAopp = (symbol?: Account['symbol']) => async (dispatch: Dispatch) => {
+    const result = await dispatch(openDeferredModal({ type: 'qr-reader', allowPaste: true }));
+    if (!result?.uri) return;
+    const info = getProtocolInfo(result.uri);
+    if (info?.scheme !== PROTOCOL_SCHEME.AOPP) return;
+    if (info.asset && symbol && info.asset !== symbol) return;
+    return {
+        asset: info.asset,
+        message: info.msg,
+        callback: info.callback,
+        format: info.format,
+    };
+};
+
+export const sendAopp =
+    (address: string, signature: string, callback: string) => async (dispatch: Dispatch) => {
+        const result = await dispatch(
+            openDeferredModal({ type: 'send-aopp-message', address, signature, callback }),
+        );
+        if (result === true) dispatch(addToast({ type: 'aopp-success' }));
+        else if (result === false) dispatch(addToast({ type: 'aopp-error', error: '' }));
+        return result;
+    };

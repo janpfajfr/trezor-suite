@@ -4,7 +4,7 @@ import { SUITE } from '@suite-actions/constants';
 import { NotificationEntry } from '@suite-reducers/notificationReducer';
 import withAction from './components/withAction';
 import withTransaction from './components/withTransaction';
-import withCoinProtocolScheme from './components/withCoinProtocolScheme';
+import { withAoppProtocol, withCoinProtocol } from './components/withCoinProtocolScheme';
 import { ViewProps } from './definitions';
 
 const simple = (View: React.ComponentType<ViewProps>, props: ViewProps) => (
@@ -21,11 +21,25 @@ const simple = (View: React.ComponentType<ViewProps>, props: ViewProps) => (
 const hocNotification = (notification: NotificationEntry, View: React.ComponentType<ViewProps>) => {
     switch (notification.type) {
         case 'coin-scheme-protocol':
-            return withCoinProtocolScheme(View, {
+            return withCoinProtocol(View, notification);
+        case 'aopp-protocol':
+            return withAoppProtocol(View, notification);
+        case 'aopp-success':
+            return simple(View, {
                 notification,
-                variant: 'transparent',
-                // values get filled in `withCoinProtocolScheme`
-                message: { id: 'TOAST_COIN_SCHEME_PROTOCOL', values: {} },
+                variant: 'success',
+                message: 'TOAST_AOPP_SUCCESS',
+            });
+        case 'aopp-error':
+            return simple(View, {
+                notification,
+                variant: 'error',
+                message: {
+                    id: 'TOAST_AOPP_ERROR',
+                    values: {
+                        error: notification.error,
+                    },
+                },
             });
         case 'acquire-error':
             return simple(View, {

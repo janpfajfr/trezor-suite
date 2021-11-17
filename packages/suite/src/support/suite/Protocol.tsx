@@ -6,41 +6,52 @@ import { getProtocolInfo } from '@suite-utils/parseUri';
 import { useActions } from '@suite-hooks';
 import * as notificationActions from '@suite-actions/notificationActions';
 import * as protocolActions from '@suite-actions/protocolActions';
-
-import type { CoinType } from '@trezor/components';
-
-export enum PROTOCOL_SCHEME {
-    BITCOIN = 'bitcoin',
-    AOPP = 'aopp',
-}
-
-export const PROTOCOL_TO_SYMBOL: { [key: string]: CoinType } = {
-    [PROTOCOL_SCHEME.BITCOIN]: 'btc',
-};
+import { PROTOCOL_SCHEME } from '@suite-reducers/protocolReducer';
 
 const Protocol = () => {
-    const { addToast, saveCoinProtocol } = useActions({
+    const { addToast, saveCoinProtocol, saveAoppProtocol } = useActions({
         addToast: notificationActions.addToast,
         saveCoinProtocol: protocolActions.saveCoinProtocol,
+        saveAoppProtocol: protocolActions.saveAoppProtocol,
     });
 
     const handleProtocolRequest = useCallback(
         uri => {
             const protocolInfo = getProtocolInfo(uri);
-
-            if (protocolInfo?.scheme === PROTOCOL_SCHEME.BITCOIN) {
-                saveCoinProtocol(protocolInfo.scheme, protocolInfo.address, protocolInfo.amount);
-
-                addToast({
-                    type: 'coin-scheme-protocol',
-                    address: protocolInfo.address,
-                    scheme: protocolInfo.scheme,
-                    amount: protocolInfo.amount,
-                    autoClose: false,
-                });
+            switch (protocolInfo?.scheme) {
+                case PROTOCOL_SCHEME.BITCOIN: {
+                    const { scheme, amount, address } = protocolInfo;
+                    saveCoinProtocol(scheme, address, amount);
+                    addToast({
+                        type: 'coin-scheme-protocol',
+                        address,
+                        scheme,
+                        amount,
+                        autoClose: false,
+                    });
+                    break;
+                }
+                case PROTOCOL_SCHEME.AOPP: {
+                    const { asset, msg, callback, format } = protocolInfo;
+                    saveAoppProtocol({
+                        asset,
+                        message: msg,
+                        callback,
+                        format,
+                    });
+                    addToast({
+                        type: 'aopp-protocol',
+                        message: msg,
+                        asset,
+                        autoClose: false,
+                    });
+                    break;
+                }
+                default:
+                    break;
             }
         },
-        [addToast, saveCoinProtocol],
+        [addToast, saveCoinProtocol, saveAoppProtocol],
     );
 
     const { search } = useLocation();
@@ -62,6 +73,15 @@ const Protocol = () => {
                 // @ts-ignore - title is deprecated but it is recommended to be set because of backwards-compatibility
                 'Bitcoin / Trezor Suite',
             );
+
+            /*
+            navigator.registerProtocolHandler(
+                'web+aopp',
+                `${window.location.origin}${process.env.ASSET_PREFIX ?? ''}/?uri=%s`,
+                // @ts-ignore - title is deprecated but it is recommended to be set because of backwards-compatibility
+                'AOPP / Trezor Suite',
+            );
+            */
         }
 
         if (isDesktop()) {
