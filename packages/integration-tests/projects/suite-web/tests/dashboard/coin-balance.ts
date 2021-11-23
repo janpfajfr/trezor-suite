@@ -22,7 +22,6 @@ describe('Dashboard with regtest', () => {
 
         // when graph becomes visible, discovery was finished
         cy.getTestElement('@dashboard/graph', { timeout: 30000 }).should('exist');
-        console.log('sending to address');
         cy.task('sendToAddress', {
             address: ADDRESS_INDEX_1,
             btc_amount: 1,
