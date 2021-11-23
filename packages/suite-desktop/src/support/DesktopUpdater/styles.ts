@@ -26,7 +26,7 @@ export const Divider = styled.div`
     background: ${props => props.theme.STROKE_GREY};
 `;
 
-export const BoxImageWrapper = styled.div`
+export const ImageWrapper = styled.div`
     margin-left: auto;
     margin-right: auto;
     top: 50px;

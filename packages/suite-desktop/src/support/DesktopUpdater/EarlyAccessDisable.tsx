@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Button } from '@trezor/components';
 import { Translation, Modal, Image } from '@suite-components';
-import { BoxImageWrapper, ButtonWrapper, Description, LeftCol, RightCol, Title } from './styles';
+import { ImageWrapper, ButtonWrapper, Description, LeftCol, RightCol, Title } from './styles';
 
 interface Props {
     hideWindow: () => void;
@@ -16,9 +16,9 @@ const EarlyAccessDisable = ({ hideWindow }: Props) => {
 
     return (
         <Modal>
-            <BoxImageWrapper>
+            <ImageWrapper>
                 <Image width={60} height={60} image="EARLY_ACCESS_DISABLE" />
-            </BoxImageWrapper>
+            </ImageWrapper>
             <Title>
                 <Translation id="TR_EARLY_ACCESS_DISABLE_CONFIRM_TITLE" />
             </Title>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button, P, Tooltip } from '@trezor/components';
 import { CheckItem, Translation, Modal, Image } from '@suite-components';
 import {
-    BoxImageWrapper,
+    ImageWrapper,
     ButtonWrapper,
     Description,
     Divider,
@@ -41,9 +41,9 @@ const EarlyAccessEnable = ({ hideWindow }: Props) => {
 
     return enabled ? (
         <Modal>
-            <BoxImageWrapper>
+            <ImageWrapper>
                 <Image width={160} height={160} image="UNI_SUCCESS" />
-            </BoxImageWrapper>
+            </ImageWrapper>
             <Title>
                 <Translation id="TR_EARLY_ACCESS_JOINED_TITLE" />
             </Title>
