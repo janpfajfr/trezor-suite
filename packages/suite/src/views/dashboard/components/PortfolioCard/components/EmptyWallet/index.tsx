@@ -7,12 +7,14 @@ const Wrapper = styled.div`
     display: flex;
     padding: 54px 42px;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
 `;
 
 const Content = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const Title = styled(H3)`
@@ -24,18 +26,8 @@ const Title = styled(H3)`
 
 const StyledImage = styled(props => <Image {...props} />)`
     display: flex;
-    width: 220px;
-    height: 180px;
-    margin-right: 52px;
-
-    @media screen and (max-width: ${variables.SCREEN_SIZE.MD}) {
-        margin-bottom: 20px;
-    }
+    margin-bottom: 24px;
 `;
-
-// const InlineButton = styled(Button)`
-//     display: inline-flex;
-// `;
 
 const SecurityItem = styled.div`
     color: ${props => props.theme.TYPE_LIGHT_GREY};

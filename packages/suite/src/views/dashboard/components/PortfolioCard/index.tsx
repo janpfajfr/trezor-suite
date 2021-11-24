@@ -24,6 +24,7 @@ const StyledCard = styled(Card)`
 const Body = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0px 20px;
     min-height: 329px;
     flex: 1;
