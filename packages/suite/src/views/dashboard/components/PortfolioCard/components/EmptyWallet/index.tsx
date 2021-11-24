@@ -7,10 +7,7 @@ const Wrapper = styled.div`
     display: flex;
     padding: 54px 42px;
     align-items: center;
-
-    @media screen and (max-width: ${variables.SCREEN_SIZE.MD}) {
-        flex-direction: column;
-    }
+    flex-direction: column;
 `;
 
 const Content = styled.div`
@@ -53,39 +50,14 @@ type Props = React.HTMLAttributes<HTMLDivElement>;
 
 const EmptyWallet = (props: Props) => (
     <Wrapper {...props} data-test="@dashboard/wallet-ready">
-        <StyledImage image="EMPTY_DASHBOARD" />
+        <StyledImage image="UNI_SUCCESS" />
         <Content>
             <Title>
                 <Translation id="TR_YOUR_WALLET_IS_READY_WHAT" />
             </Title>
             <SecurityItem>
                 <Translation id="TR_ADDITIONAL_SECURITY_FEATURES" />
-                {/* <InlineButton
-                        variant="tertiary"
-                        size="small"
-                        icon="ARROW_RIGHT"
-                        alignIcon="right"
-                        onClick={() => {
-                            console.log('yup it does not do anything. we know!');
-                        }}
-                    >
-                        <Translation id="TR_FINISH_ADVANCED_SECURITY" />
-                    </InlineButton> */}
             </SecurityItem>
-            {/* <SecurityItem>
-                    <Translation id="TR_LOOKING_FOR_QUICK_EASY" />
-                    <InlineButton
-                        variant="tertiary"
-                        size="small"
-                        icon="ARROW_RIGHT"
-                        alignIcon="right"
-                        onClick={() => {
-                            console.log('do something');
-                        }}
-                    >
-                        Buy BTC
-                    </InlineButton>
-                </SecurityItem> */}
         </Content>
     </Wrapper>
 );

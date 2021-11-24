@@ -86,7 +86,6 @@ const SVG_IMAGES = {
     '12_WORDS': '12-words.svg',
     '18_WORDS': '18-words.svg',
     '24_WORDS': '24-words.svg',
-    EMPTY_DASHBOARD: 'empty-dashboard.svg',
     EMPTY_WALLET: 'wallet-empty.svg',
     ANALYTICS: 'analytics.svg',
     WELCOME: 'welcome.svg',
