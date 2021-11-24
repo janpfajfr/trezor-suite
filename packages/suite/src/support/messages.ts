@@ -4693,7 +4693,12 @@ export default defineMessages({
     },
     TR_EARLY_ACCESS: {
         id: 'TR_EARLY_ACCESS',
-        defaultMessage: 'Early access program',
+        defaultMessage: 'Early Access Program',
+    },
+    TR_EARLY_ACCESS_ENABLED: {
+        id: 'TR_EARLY_ACCESS_ENABLED',
+        defaultMessage: 'You are in Early Access Program',
+        description: 'Title in settings if Early Access is active',
     },
     TR_EARLY_ACCESS_MENU: {
         id: 'TR_EARLY_ACCESS_MENU',
@@ -4705,23 +4710,27 @@ export default defineMessages({
     },
     TR_EARLY_ACCESS_DESCRIPTION: {
         id: 'TR_EARLY_ACCESS_DESCRIPTION',
-        defaultMessage: 'Enable to get cool features earlier.',
+        defaultMessage: 'Join to get cool features earlier.',
     },
     TR_EARLY_ACCESS_DESCRIPTION_ENABLED: {
         id: 'TR_EARLY_ACCESS_DESCRIPTION_ENABLED',
-        defaultMessage: 'Disable if you no longer want priority access to new features.',
+        defaultMessage: 'Leave if you no longer want priority access to new features.',
     },
     TR_EARLY_ACCESS_ENABLE: {
         id: 'TR_EARLY_ACCESS_ENABLE',
-        defaultMessage: 'Enable',
+        defaultMessage: 'Join',
+    },
+    TR_EARLY_ACCESS_STAY_IN: {
+        id: 'TR_EARLY_ACCESS_STAY_IN',
+        defaultMessage: 'Stay in',
     },
     TR_EARLY_ACCESS_DISABLE: {
         id: 'TR_EARLY_ACCESS_DISABLE',
-        defaultMessage: 'Disable',
+        defaultMessage: 'Leave',
     },
     TR_EARLY_ACCESS_ENABLE_CONFIRM: {
         id: 'TR_EARLY_ACCESS_ENABLE_CONFIRM',
-        defaultMessage: 'Enable early access',
+        defaultMessage: 'Join Early Access',
     },
     TR_EARLY_ACCESS_ENABLE_CONFIRM_TITLE: {
         id: 'TR_EARLY_ACCESS_ENABLE_CONFIRM_TITLE',
@@ -4733,7 +4742,7 @@ export default defineMessages({
     },
     TR_EARLY_ACCESS_ENABLE_CONFIRM_CHECK: {
         id: 'TR_EARLY_ACCESS_ENABLE_CONFIRM_CHECK',
-        defaultMessage: 'I understand this shit is experimental FIXME',
+        defaultMessage: 'I understand this shit is experimental',
     },
     TR_EARLY_ACCESS_ENABLE_CONFIRM_TOOLTIP: {
         id: 'TR_EARLY_ACCESS_ENABLE_CONFIRM_TOOLTIP',
@@ -4774,7 +4783,7 @@ export default defineMessages({
     },
     TR_EARLY_ACCESS_DISABLE_CONFIRM_TITLE: {
         id: 'TR_EARLY_ACCESS_DISABLE_CONFIRM_TITLE',
-        defaultMessage: 'Really disable early access program?',
+        defaultMessage: 'Really want to leave early access program?',
     },
     TR_EARLY_ACCESS_DISABLE_CONFIRM_DESCRIPTION: {
         id: 'TR_EARLY_ACCESS_DISABLE_CONFIRM_DESCRIPTION',
