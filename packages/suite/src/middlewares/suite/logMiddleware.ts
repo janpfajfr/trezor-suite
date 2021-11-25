@@ -50,11 +50,7 @@ const log =
                 break;
             case DEVICE.CONNECT:
             case DEVICE.DISCONNECT:
-                api.dispatch(logActions.addAction(action));
-                break;
             case SUITE.APP_CHANGED:
-                api.dispatch(logActions.addAction(action));
-                break;
             case DISCOVERY.COMPLETE:
                 api.dispatch(logActions.addAction(action));
                 break;

@@ -26,4 +26,6 @@ export default {
     },
     release: process.env.SENTRY_RELEASE,
     environment: process.env.SUITE_TYPE,
+    normalizeDepth: 4,
+    maxBreadcrumbs: 30,
 } as BrowserOptions;

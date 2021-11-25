@@ -2,13 +2,7 @@ import { LogEntry } from '@suite-reducers/logReducer';
 import { Action, Dispatch, GetState } from '@suite-types';
 import * as Sentry from '@sentry/browser';
 import { LOG } from './constants';
-import {
-    redactDevice,
-    redactCustom,
-    redactAction,
-    redactDiscovery,
-    prettifyLog,
-} from '@suite-utils/logUtils';
+import { redactDevice, redactCustom, redactAction, redactDiscovery } from '@suite-utils/logUtils';
 
 export type LogAction =
     | { type: typeof LOG.ADD; payload: LogEntry }
@@ -96,9 +90,9 @@ export const reportToSentry = (error: any) => (dispatch: Dispatch, getState: Get
         scope.setUser({ id: analytics.instanceId });
         scope.setContext('suiteState', {
             device: redactDevice(suite.device) ?? null,
-            discovery: prettifyLog(wallet.discovery.map(d => redactDiscovery(d))),
+            discovery: wallet.discovery.map(redactDiscovery),
             enabledCoins: wallet.settings.enabledNetworks,
-            suiteLog: prettifyLog(dispatch(getLog(true))),
+            suiteLog: dispatch(getLog(true))?.slice(-30),
         });
         Sentry.captureException(error);
     });
