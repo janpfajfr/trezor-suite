@@ -72,10 +72,6 @@ describe('T1 - Device settings', () => {
             'have.text',
             'Settings changed successfully',
         );
-        cy.getTestElement('@toast/settings-applied').should(
-            'have.text',
-            'Settings changed successfully',
-        );
         cy.getTestElement('@menu/switch-device').should('contain', 'New name @21');
     });
 
