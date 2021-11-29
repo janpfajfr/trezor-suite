@@ -50,6 +50,31 @@ describe('T1 - Device settings', () => {
         cy.getTestElement('@settings/auto-lock-select/input').should('not.exist');
     });
 
+    it('change device name', () => {
+        cy.task('startEmu', { version: '1.9.3', wipe: true });
+        cy.task('setupEmu', { needs_backup: false });
+        cy.task('startBridge');
+        cy.viewport(1024, 768).resetDb();
+        cy.prefixedVisit('/');
+
+        cy.passThroughInitialRun();
+
+        cy.getTestElement('@suite/menu/settings').click();
+        cy.getTestElement('@suite/menu/settings-index').click();
+        cy.getTestElement('@settings/menu/device').click();
+        cy.getTestElement('@settings/device/label-input').clear({ scrollBehavior: 'center' });
+        cy.getTestElement('@settings/device/label-input').type('New name @21');
+        cy.getTestElement('@settings/device/label-submit').click({ force: true });
+
+        cy.task('pressYes');
+
+        cy.getTestElement('@toast/settings-applied').should(
+            'have.text',
+            'Settings changed successfully',
+        );
+        cy.getTestElement('@menu/switch-device').should('contain', 'New name @21');
+    });
+
     // TODO: pin success
     // TODO: pin caching immediately after it is set
     // TODO: keyboard handling
